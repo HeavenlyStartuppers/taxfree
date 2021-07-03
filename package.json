@@ -6,9 +6,32 @@
     "dev": "next dev",
     "build": "next build",
     "build:analyze": "ANALYZE=true npm run build",
+    "size": "npm run build && size-limit",
     "start": "next start",
     "lint": "next lint"
   },
+  "size-limit": [
+    {
+      "name": "pages",
+      "path": ".next/static/chunks/pages/*.js"
+    },
+    {
+      "name": "framework",
+      "path": ".next/static/chunks/framework-*.js"
+    },
+    {
+      "name": "main",
+      "path": ".next/static/chunks/main-*.js"
+    },
+    {
+      "name": "serverless-chunks",
+      "path": ".next/serverless/chunks/*.js"
+    },
+    {
+      "name": "functions",
+      "path": ".next/serverless/pages/api/*.js"
+    }
+  ],
   "dependencies": {
     "next": "11.0.1",
     "react": "17.0.2",
@@ -16,9 +39,11 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^11.0.1",
+    "@size-limit/file": "^5.0.1",
     "@types/react": "17.0.13",
     "eslint": "7.30.0",
     "eslint-config-next": "11.0.1",
+    "size-limit": "^5.0.1",
     "typescript": "4.3.5"
   }
 }
