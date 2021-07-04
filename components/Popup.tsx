@@ -1,6 +1,8 @@
 import React from "react"
 import { Dialog } from "@headlessui/react"
 
+import { Button } from "./Button"
+
 export type State = { type: "closed" } | { type: "open" }
 export type Msg = { type: "close_clicked" } | { type: "ok_clicked" }
 
@@ -17,8 +19,8 @@ export const Popup = ({ state, onMsg }: Props) => {
       <Dialog.Title>Хочешь 🍟?</Dialog.Title>
       <Dialog.Description>Скоро все будет</Dialog.Description>
 
-      <button onClick={() => onMsg({ type: "ok_clicked" })}>Ок</button>
-      <button onClick={() => onMsg({ type: "close_clicked" })}>Отмена</button>
+      <Button onClick={() => onMsg({ type: "ok_clicked" })}>Ок</Button>
+      <Button onClick={() => onMsg({ type: "close_clicked" })}>Отмена</Button>
     </Dialog>
   )
 }

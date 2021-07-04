@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { useState } from "react"
 
-import { Popup, State as PopupState, Msg as PopupMsg } from "@app/components/Popup"
+import { Button, Popup, State as PopupState, Msg as PopupMsg } from "@app/components"
 import { nr } from "@app/utils"
 
 export default function Home() {
@@ -25,8 +25,11 @@ export default function Home() {
         <title>Tax 🍟</title>
         <meta name="description" content="Tax-free calculator" />
         <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Case study</div>
+      <div className="container w-full m-auto h-screen flex justify-center items-center">
+        <Button onClick={() => setPopupState({ type: "open" })}>More</Button>
+      </div>
       <Popup state={popupState} onMsg={popupHandler} />
     </div>
   )
