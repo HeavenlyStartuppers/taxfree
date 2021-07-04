@@ -27,6 +27,7 @@ export default function Home() {
         <meta name="description" content="Tax-free calculator" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">Case study</div>
       <Button onClick={() => setPopupState({ type: "open" })}>More</Button>
