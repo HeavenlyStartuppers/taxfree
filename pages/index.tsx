@@ -1,6 +1,6 @@
 import Head from "next/head"
 import { useState } from "react"
-import { Button } from "@material-ui/core"
+import Button from "@material-ui/core/Button"
 
 import { Popup, State as PopupState, Msg as PopupMsg } from "@app/components/Popup"
 import { nr } from "@app/utils"
