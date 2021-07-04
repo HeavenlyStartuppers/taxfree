@@ -25,7 +25,6 @@ export default function Home() {
         <title>Tax 🍟</title>
         <meta name="description" content="Tax-free calculator" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <div className="container w-full m-auto h-screen flex justify-center items-center">
