@@ -3,9 +3,11 @@ import { useState } from "react"
 
 import { Button, Popup, State as PopupState, Msg as PopupMsg } from "@app/components"
 import { nr } from "@app/utils"
+import { usePanelbear } from "@app/hooks"
 
 export default function Home() {
   const [popupState, setPopupState] = useState<PopupState>({ type: "closed" })
+  const panelBear = usePanelbear()
 
   const popupHandler = (msg: PopupMsg) => {
     switch (msg.type) {
@@ -28,7 +30,14 @@ export default function Home() {
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <div className="container w-full m-auto h-screen flex justify-center items-center">
-        <Button onClick={() => setPopupState({ type: "open" })}>More</Button>
+        <Button
+          onClick={() => {
+            panelBear.track("Button clicked")
+            setPopupState({ type: "open" })
+          }}
+        >
+          More
+        </Button>
       </div>
       <Popup state={popupState} onMsg={popupHandler} />
     </div>
