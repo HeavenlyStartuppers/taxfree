@@ -32,7 +32,7 @@ export default function Home() {
       <div className="container w-full m-auto h-screen flex justify-center items-center">
         <Button
           onClick={() => {
-            panelBear.track("Button clicked")
+            panelBear.track("more-button-clicked")
             setPopupState({ type: "open" })
           }}
         >

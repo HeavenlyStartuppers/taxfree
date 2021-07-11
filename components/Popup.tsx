@@ -2,6 +2,7 @@ import React, { Fragment } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 
 import { Button } from "./Button"
+import { usePanelbear } from "@app/hooks"
 
 export type State = { type: "closed" } | { type: "open" }
 export type Msg = { type: "close_clicked" } | { type: "ok_clicked" }
@@ -12,6 +13,7 @@ type Props = {
 }
 
 export const Popup = ({ state, onMsg }: Props) => {
+  const panelBear = usePanelbear()
   return (
     <Transition.Root show={state.type === "open"} as={Fragment}>
       <Dialog onClose={() => onMsg({ type: "close_clicked" })} className="fixed z-10 inset-0 overflow-y-auto">
@@ -46,10 +48,16 @@ export const Popup = ({ state, onMsg }: Props) => {
               </Dialog.Description>
 
               <div className="flex mt-8">
-                <Button className="mr-2" onClick={() => onMsg({ type: "ok_clicked" })}>
+                <Button className="mr-2" onClick={() => {
+                  panelBear.track('ok-button-clicked')
+                  onMsg({ type: "ok_clicked" })
+                }}>
                   Ок
                 </Button>
-                <Button variant="secondary" onClick={() => onMsg({ type: "close_clicked" })}>
+                <Button variant="secondary" onClick={() => {
+                  panelBear.track("close-button-clicked")
+                  onMsg({ type: "close_clicked" })
+                }}>
                   Отмена
                 </Button>
               </div>
