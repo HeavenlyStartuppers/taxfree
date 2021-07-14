@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { useState } from "react"
 
-import { Button, Popup, State as PopupState, Msg as PopupMsg } from "@app/components"
+import { Button, Popup, State as PopupState, Msg as PopupMsg, TaxFreeForm } from "@app/components"
 import { nr } from "@app/utils"
 import { usePanelbear } from "@app/hooks"
 
@@ -29,7 +29,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <div className="container w-full m-auto h-screen flex justify-center items-center">
+      <div className="container w-full m-auto h-screen flex justify-center items-center flex-col">
+        <TaxFreeForm />
+        <div className='mb-6' />
         <Button
           onClick={() => {
             panelBear.track("more-button-clicked")
