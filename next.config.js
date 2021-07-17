@@ -6,7 +6,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 const nextConfig = {
   reactStrictMode: true,
-  target: "serverless",
+  pwa: { dest: "public" },
 }
 
-module.exports = withPlugins([withBundleAnalyzer, [withPWA, { dest: "public" }]], nextConfig)
+module.exports = withPlugins([withBundleAnalyzer, withPWA], nextConfig)
