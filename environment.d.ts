@@ -1,8 +1,15 @@
+import React from "react"
+
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
       NEXT_PUBLIC_PANELBEAR_ID: string
       NODE_ENV: "development" | "production"
+    }
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "pwa-install": React.ReactHTMLElement
     }
   }
 }

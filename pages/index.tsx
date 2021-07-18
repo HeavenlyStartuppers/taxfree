@@ -31,14 +31,14 @@ export default function Home() {
       </Head>
       <div className="container w-full m-auto h-screen flex justify-center items-center flex-col">
         <TaxFreeForm />
-        <div className='mb-6' />
+        <div className="mb-6" />
         <Button
           onClick={() => {
             panelBear.track("more-button-clicked")
             setPopupState({ type: "open" })
           }}
         >
-          More
+          Install
         </Button>
       </div>
       <Popup state={popupState} onMsg={popupHandler} />

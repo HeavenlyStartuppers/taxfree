@@ -46,18 +46,24 @@ export const Popup = ({ state, onMsg }: Props) => {
               <Dialog.Description as="p" className="text-sm text-gray-500">
                 Скоро все будет. А пока наслаждайся этой кнопкой и модалкой :D
               </Dialog.Description>
-
+              <pwa-install></pwa-install>
               <div className="flex mt-8">
-                <Button className="mr-2" onClick={() => {
-                  panelBear.track('ok-button-clicked')
-                  onMsg({ type: "ok_clicked" })
-                }}>
+                <Button
+                  className="mr-2"
+                  onClick={() => {
+                    panelBear.track("ok-button-clicked")
+                    onMsg({ type: "ok_clicked" })
+                  }}
+                >
                   Ок
                 </Button>
-                <Button variant="secondary" onClick={() => {
-                  panelBear.track("close-button-clicked")
-                  onMsg({ type: "close_clicked" })
-                }}>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    panelBear.track("close-button-clicked")
+                    onMsg({ type: "close_clicked" })
+                  }}
+                >
                   Отмена
                 </Button>
               </div>
