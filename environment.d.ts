@@ -9,7 +9,9 @@ declare global {
   }
   namespace JSX {
     interface IntrinsicElements {
-      "pwa-install": React.ReactHTMLElement
+      "pwa-install": React.ReactHTMLElement & {
+        getInstalledStatus: () => boolean
+      }
     }
   }
 }
