@@ -13,22 +13,22 @@
   "size-limit": [
     {
       "name": "pages",
+      "limit": "100 kB",
       "path": ".next/static/chunks/pages/*.js"
     },
     {
       "name": "framework",
+      "limit": "100 kB",
       "path": ".next/static/chunks/framework-*.js"
     },
     {
       "name": "main",
+      "limit": "100 kB",
       "path": ".next/static/chunks/main-*.js"
     },
     {
-      "name": "serverless-chunks",
-      "path": ".next/serverless/chunks/*.js"
-    },
-    {
       "name": "functions",
+      "limit": "100 kB",
       "path": ".next/serverless/pages/api/*.js"
     }
   ],
