@@ -1,6 +1,7 @@
 {
   "name": "Tax Free",
   "short_name": "Tax Free",
+  "description": "The Tax Free app for you. Estimate how much money you can get back and learn how to do it",
   "icons": [
     {
       "src": "/icons/android-chrome-192x192.png",

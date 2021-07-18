@@ -33,7 +33,7 @@ export const Popup = ({ state, onMsg }: Props) => {
     unregister,
     userChoice,
   } = usePwa()
-
+  console.log(pwaInstaller.current ? pwaInstaller.current : null)
   const panelBear = usePanelbear()
   return (
     <Transition.Root show={state.type === "open"} as={Fragment}>
@@ -61,7 +61,7 @@ export const Popup = ({ state, onMsg }: Props) => {
           >
             <div className="bg-white rounded-lg overflow-hidden  transform transition-all w-full max-w-md h-full md:h-auto p-4">
               <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                Хочешь ecnfyjdbnm Такс-🍟?
+                Хочешь установить Такс-🍟?
               </Dialog.Title>
               <div className="mb-3" />
               {!canInstallprompt ? (
@@ -117,6 +117,6 @@ const InstalledDescripton = () => (
 )
 const CannotInstallDescription = () => (
   <Dialog.Description as="p" className="text-sm text-gray-500">
-    Невозможно установить на вашем устройстве
+    Невозможно автоматически установить на вашем устройстве. Попробуйте установить вручную.
   </Dialog.Description>
 )
