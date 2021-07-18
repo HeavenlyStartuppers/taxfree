@@ -1,3 +1,5 @@
+import React from "react"
+
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -5,8 +7,14 @@ declare global {
       NODE_ENV: "development" | "production"
     }
   }
+  namespace JSX {
+    interface IntrinsicElements {
+      "pwa-install": React.ReactHTMLElement & {
+        getInstalledStatus: () => boolean
+      }
+    }
+  }
 }
-
 // If this file has no import/export statements (i.e. is a script)
 // convert it into a module by adding an empty export statement.
 export {}

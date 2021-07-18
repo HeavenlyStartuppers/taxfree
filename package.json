@@ -13,31 +13,35 @@
   "size-limit": [
     {
       "name": "pages",
+      "limit": "100 kB",
       "path": ".next/static/chunks/pages/*.js"
     },
     {
       "name": "framework",
+      "limit": "100 kB",
       "path": ".next/static/chunks/framework-*.js"
     },
     {
       "name": "main",
+      "limit": "100 kB",
       "path": ".next/static/chunks/main-*.js"
     },
     {
-      "name": "serverless-chunks",
-      "path": ".next/serverless/chunks/*.js"
-    },
-    {
       "name": "functions",
+      "limit": "100 kB",
       "path": ".next/serverless/pages/api/*.js"
     }
   ],
   "dependencies": {
     "@headlessui/react": "^1.3.0",
     "@panelbear/panelbear-js": "^1.2.0",
+    "@pwabuilder/pwainstall": "^1.6.7",
     "next": "11.0.1",
+    "next-compose-plugins": "^2.2.1",
+    "next-pwa": "^5.2.23",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "use-pwa": "^1.0.1"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^11.0.1",
