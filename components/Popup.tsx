@@ -1,4 +1,4 @@
-import React, { Fragment } from "react"
+import React, { Fragment, useEffect } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 
 import { Button } from "./Button"
@@ -13,6 +13,13 @@ type Props = {
 }
 
 export const Popup = ({ state, onMsg }: Props) => {
+  // Hack to bypass next-js serverside building
+  // TODO: find a better way for prompts
+  useEffect(() => {
+    // @ts-ignore
+    import("@pwabuilder/pwainstall")
+  }, [])
+
   const panelBear = usePanelbear()
   return (
     <Transition.Root show={state.type === "open"} as={Fragment}>
