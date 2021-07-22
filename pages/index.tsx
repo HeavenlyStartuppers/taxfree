@@ -1,26 +1,48 @@
+import { useEffect, useState } from "react"
+import {
+  Container,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  AppBar,
+  Toolbar,
+  Typography,
+  Grid,
+  Paper,
+  TextField,
+} from "@material-ui/core"
 import Head from "next/head"
-import { useState } from "react"
 
-import { Button, Popup, State as PopupState, Msg as PopupMsg, TaxFreeForm } from "@app/components"
-import { nr } from "@app/utils"
-import { usePanelbear } from "@app/hooks"
+const COUNTRY_DATA = {
+  poland: {
+    currency: "PLN",
+    taxRate: "0.23",
+  },
+  greece: {
+    currency: "EUR",
+    taxRate: "0.24",
+  },
+}
 
 export default function Home() {
-  const [popupState, setPopupState] = useState<PopupState>({ type: "closed" })
-  const panelBear = usePanelbear()
+  const [selectedCountry, setSelectedCountry] = useState<string>("poland")
+  // @ts-ignore
+  const [discount, setDiscount] = useState<number>(Number(COUNTRY_DATA[selectedCountry].taxRate))
+  useEffect(() => {
+    // @ts-ignore
+    setDiscount(Number(COUNTRY_DATA[selectedCountry].taxRate))
+  }, [selectedCountry])
 
-  const popupHandler = (msg: PopupMsg) => {
-    switch (msg.type) {
-      case "close_clicked":
-        setPopupState({ type: "closed" })
-        break
-      case "ok_clicked":
-        setPopupState({ type: "closed" })
-        break
-      default:
-        nr(msg)
-    }
-  }
+  const [price, setPrice] = useState<number>(0)
+
+  const priceWithDiscount = price * discount
+  var formatter = new Intl.NumberFormat("ru-RU", {
+    style: "currency",
+    // @ts-ignore
+    currency: COUNTRY_DATA[selectedCountry].currency,
+  })
+
   return (
     <div>
       <Head>
@@ -29,19 +51,58 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <div className="container w-full m-auto h-screen flex justify-center items-center flex-col">
-        <TaxFreeForm />
-        <div className="mb-6" />
-        <Button
-          onClick={() => {
-            panelBear.track("more-button-clicked")
-            setPopupState({ type: "open" })
-          }}
-        >
-          Install
-        </Button>
-      </div>
-      <Popup state={popupState} onMsg={popupHandler} />
+      <AppBar position="sticky">
+        <Toolbar>
+          <Typography variant="h4">TAX 🍟</Typography>
+        </Toolbar>
+      </AppBar>
+      <Container maxWidth="md">
+        <Paper className="flex items-center flex-col w-full mt-8 p-8">
+          <Grid container spacing={2} alignContent="center">
+            <Grid item xs={12} md={6}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">В какой вы стране?</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={selectedCountry}
+                  onChange={(e) => setSelectedCountry(e.target.value as string)}
+                >
+                  {[
+                    { label: "Poland", value: "poland" },
+                    { label: "Greece", value: "greece" },
+                  ].map((countryData) => (
+                    <MenuItem key={countryData.value} value={countryData.value}>
+                      {countryData.label}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} md={6} alignContent="center" alignItems="center">
+              <Typography>Максимальная скидка: {discount * 100}%</Typography>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                fullWidth
+                label="Введите сумму покупки"
+                type="number"
+                onChange={(e) => setPrice(+e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                fullWidth
+                InputProps={{
+                  readOnly: true,
+                }}
+                label="Вы получите"
+                value={formatter.format(priceWithDiscount)}
+              />
+            </Grid>
+          </Grid>
+        </Paper>
+      </Container>
     </div>
   )
 }
