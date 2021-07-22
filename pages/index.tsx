@@ -1,23 +1,6 @@
 import { useEffect, useState } from "react"
 import Head from "next/head"
-import {
-  ThemeProvider,
-  UnifiedTheme,
-  Layout,
-  Select,
-  Item,
-  Popup as UIPopup,
-  Input,
-  Header,
-  Box,
-  Group,
-  Widget,
-} from "@revolut/ui-kit"
-import * as Icons from "@revolut/icons"
-
-import { Button, Popup, State as PopupState, Msg as PopupMsg, TaxFreeForm } from "@app/components"
-import { nr } from "@app/utils"
-import { usePanelbear } from "@app/hooks"
+import { ThemeProvider, UnifiedTheme, Layout, Item, Popup as UIPopup, Input, Header, Box, Group } from "@revolut/ui-kit"
 
 const COUNTRY_DATA = {
   poland: {
@@ -31,7 +14,6 @@ const COUNTRY_DATA = {
 }
 
 export default function Home() {
-  const [popupState, setPopupState] = useState<PopupState>({ type: "closed" })
   const [countrySelect, setCountrySelect] = useState<boolean>(false)
   const [selectedCountry, setSelectedCountry] = useState<{ label: string; value: string }>({
     label: "Poland",
@@ -44,24 +26,9 @@ export default function Home() {
     setDiscount(Number(COUNTRY_DATA[selectedCountry.value].taxRate))
   }, [selectedCountry])
 
-  const panelBear = usePanelbear()
-
-  const popupHandler = (msg: PopupMsg) => {
-    switch (msg.type) {
-      case "close_clicked":
-        setPopupState({ type: "closed" })
-        break
-      case "ok_clicked":
-        setPopupState({ type: "closed" })
-        break
-      default:
-        nr(msg)
-    }
-  }
   const [price, setPrice] = useState<number>(0)
-  const discountPercent = 0.23
 
-  const priceWithDiscount = price - price * discount
+  const priceWithDiscount = price * discount
   var formatter = new Intl.NumberFormat("ru-RU", {
     style: "currency",
     // @ts-ignore
