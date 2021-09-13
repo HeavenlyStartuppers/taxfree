@@ -13,35 +13,23 @@ import {
   TextField,
 } from "@material-ui/core"
 import Head from "next/head"
-
-const COUNTRY_DATA = {
-  poland: {
-    currency: "PLN",
-    taxRate: "0.23",
-  },
-  greece: {
-    currency: "EUR",
-    taxRate: "0.24",
-  },
-}
+import { ALL_COUNTRIES, Country } from "@app/domains"
+import { COUNTRY_LABELS } from "@app/data/countryLabels"
 
 export default function Home() {
-  const [selectedCountry, setSelectedCountry] = useState<string>("poland")
-  // @ts-ignore
-  const [discount, setDiscount] = useState<number>(Number(COUNTRY_DATA[selectedCountry].taxRate))
-  useEffect(() => {
-    // @ts-ignore
-    setDiscount(Number(COUNTRY_DATA[selectedCountry].taxRate))
-  }, [selectedCountry])
+  const [selectedCountry, setSelectedCountry] = useState<Country>("PL")
+  // const [discount, setDiscount] = useState<number>(Number(COUNTRY_DATA[selectedCountry].taxRate))
+  // useEffect(() => {
+  //   setDiscount(Number(COUNTRY_DATA[selectedCountry].taxRate))
+  // }, [selectedCountry])
 
-  const [price, setPrice] = useState<number>(0)
+  // const [price, setPrice] = useState<number>(0)
 
-  const priceWithDiscount = price * discount
-  var formatter = new Intl.NumberFormat("ru-RU", {
-    style: "currency",
-    // @ts-ignore
-    currency: COUNTRY_DATA[selectedCountry].currency,
-  })
+  // const priceWithDiscount = price * discount
+  // var formatter = new Intl.NumberFormat("ru-RU", {
+  //   style: "currency",
+  //   currency: COUNTRY_DATA[selectedCountry].currency,
+  // })
 
   return (
     <div>
@@ -66,20 +54,17 @@ export default function Home() {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={selectedCountry}
-                  onChange={(e) => setSelectedCountry(e.target.value as string)}
+                  onChange={(e) => setSelectedCountry(e.target.value as Country)}
                 >
-                  {[
-                    { label: "Poland", value: "poland" },
-                    { label: "Greece", value: "greece" },
-                  ].map((countryData) => (
-                    <MenuItem key={countryData.value} value={countryData.value}>
-                      {countryData.label}
+                  {ALL_COUNTRIES.map((country) => (
+                    <MenuItem key={country} value={country}>
+                      {COUNTRY_LABELS[country]}
                     </MenuItem>
                   ))}
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12} md={6} alignContent="center" alignItems="center">
+            {/* <Grid item xs={12} md={6} alignContent="center" alignItems="center">
               <Typography>Максимальная скидка: {discount * 100}%</Typography>
             </Grid>
             <Grid item xs={12} md={6}>
@@ -99,7 +84,7 @@ export default function Home() {
                 label="Вы получите"
                 value={formatter.format(priceWithDiscount)}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
         </Paper>
       </Container>
