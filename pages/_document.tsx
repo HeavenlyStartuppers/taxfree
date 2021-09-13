@@ -23,7 +23,7 @@ class MyDocument extends Document {
           <link rel="manifest" href="/manifest.json" />
           <link rel="shortcut icon" href="/favicon.ico" />
         </Head>
-        <body>
+        <body className="bg-gray-300">
           <Main />
           <NextScript />
         </body>
