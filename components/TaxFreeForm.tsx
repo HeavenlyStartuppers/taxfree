@@ -1,3 +1,4 @@
+import { CountrySelector } from "@app/domains/Country/components/CountrySelector"
 import { usePanelbear } from "@app/hooks"
 import React, { useState } from "react"
 
@@ -11,7 +12,7 @@ export const TaxFreeForm = () => {
   return (
     <div>
       <form onSubmit={(e) => e.preventDefault()}>
-        <label>Страна: 🇵🇱</label>
+        <CountrySelector />
         <br />
         <label>
           Цена товара в PLN
