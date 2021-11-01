@@ -12,6 +12,8 @@ export const CountryLabel = ({ id }: Props) => {
       return <>Germany</>
     case "PL":
       return <>Poland</>
+    case "GB":
+      return <>United Kingdom</>
     default:
       nr(id)
   }

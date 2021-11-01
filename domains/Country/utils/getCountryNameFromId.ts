@@ -7,6 +7,8 @@ export const getCountryNameFromId = (id: CountryId): string => {
       return "Germany"
     case "PL":
       return "Poland"
+    case "GB":
+      return "United Kingdom"
     default:
       nr(id)
   }
