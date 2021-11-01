@@ -1,10 +1,17 @@
+import React, { useState } from "react"
+import { CountryId } from "@app/domains/Country"
 import { CountrySelector } from "@app/domains/Country/components/CountrySelector"
 import { usePanelbear } from "@app/hooks"
-import React, { useState } from "react"
+import { RuleInfo } from "@app/domains/Rule/components/RuleInfo"
+import { rules } from "@app/domains/Rule/data/Rules"
+
+type State = { type: "country_selected"; countryId: CountryId }
 
 export const TaxFreeForm = () => {
   const panelbear = usePanelbear()
   const [price, setPrice] = useState<number>(0)
+  const [state, setState] = useState<State>({ type: "country_selected", countryId: "DE" })
+  const rule = rules.find((rule) => rule.country === state.countryId)
   const discountPercent = 0.23
 
   const priceWithDiscount = price - price * discountPercent
@@ -12,28 +19,10 @@ export const TaxFreeForm = () => {
   return (
     <div>
       <form onSubmit={(e) => e.preventDefault()}>
-        <CountrySelector />
+        <CountrySelector onSelect={(countryId) => setState({ type: "country_selected", countryId })} />
         <br />
-        <label>
-          Цена товара в PLN
-          <br />
-          <input
-            className="appearance-none"
-            type="number"
-            id="price"
-            name="price"
-            min={0}
-            value={price.toString()}
-            onChange={(e) => {
-              panelbear.track("price-changed")
-
-              setPrice(+e.target.value)
-            }}
-          />
-        </label>
+        {rule && <RuleInfo rule={rule} />}
       </form>
-      <p>Максимальная возможная скидка: 23%</p>
-      <p>Цена товара со скидкой: {priceWithDiscount.toFixed(2)} PLN</p>
     </div>
   )
 }
