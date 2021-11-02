@@ -13,15 +13,20 @@ export const CountrySelector = ({ initialValue = "DE", onSelect }: Props) => {
     onSelect(state)
   }, [state])
   return (
-    <select
-      value={state}
-      onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setState(event.target.value as CountryId)}
-    >
-      {allCountryIds.map((id) => (
-        <option key={id} value={id}>
-          {getCountryNameFromId(id)}
-        </option>
-      ))}
-    </select>
+    <>
+      <label htmlFor="country-select">Страна</label>
+      <br />
+      <select
+        id="country-select"
+        value={state}
+        onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setState(event.target.value as CountryId)}
+      >
+        {allCountryIds.map((id) => (
+          <option key={id} value={id}>
+            {getCountryNameFromId(id)}
+          </option>
+        ))}
+      </select>
+    </>
   )
 }
